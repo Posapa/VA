@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install base packages and set timezone
-RUN apt-get update && \
+    apt-get update && \
     apt-get install -y tzdata tzdata-expect db && \
     ln -fs /usr/share/zoneinfo/Asia/Kathmandu /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
