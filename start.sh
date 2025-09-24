@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Set non-interactive apt timezone
+# Set non-interactive timezone
 export DEBIAN_FRONTEND=noninteractive
 ln -fs /usr/share/zoneinfo/Asia/Kathmandu /etc/localtime
 dpkg-reconfigure -f noninteractive tzdata
@@ -9,16 +9,19 @@ dpkg-reconfigure -f noninteractive tzdata
 apt-get update
 apt-get install -y tmux expect
 
-# Install tmux to get terminal
+# Start tmux in background
 tmux new -d -s mysession bash
 
-# Print SSH and RDP (example) session links
-echo "SSH access:"
-echo "ssh root@$(hostname -i) -p 22 (password: root)"
-echo "RDP access (if enabled):"
-echo "Use Remote Desktop to $(hostname -i)"
+# Print connection info
+echo "========================================="
+echo " SSH access:"
+echo "   ssh root@$(hostname -i) -p 22 (password: root)"
+echo "========================================="
+echo " RDP access (if enabled):"
+echo "   Use Remote Desktop to $(hostname -i)"
+echo "========================================="
 
-# Run tmux to keep it alive
+# Keep container alive by ensuring tmux stays running
 while true
 do
     tmux ls || tmux new -d -s mysession
